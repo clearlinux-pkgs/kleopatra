@@ -5,19 +5,19 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kleopatra
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/kleopatra-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/kleopatra-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/kleopatra-18.08.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/kleopatra-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/kleopatra-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/kleopatra-18.12.2.tar.xz.sig
+Summary  : Certificate Manager and Unified Crypto GUI
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
-Requires: kleopatra-bin
-Requires: kleopatra-lib
-Requires: kleopatra-data
-Requires: kleopatra-license
-Requires: kleopatra-locales
+Requires: kleopatra-bin = %{version}-%{release}
+Requires: kleopatra-data = %{version}-%{release}
+Requires: kleopatra-lib = %{version}-%{release}
+Requires: kleopatra-license = %{version}-%{release}
+Requires: kleopatra-locales = %{version}-%{release}
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
@@ -26,7 +26,7 @@ BuildRequires : kmime-dev
 BuildRequires : libassuan-dev
 BuildRequires : libgpg-error-dev
 BuildRequires : libkleo-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 These scripts are to be executed like this:
@@ -38,8 +38,8 @@ scripts, at least for the gpgex cases.
 %package bin
 Summary: bin components for the kleopatra package.
 Group: Binaries
-Requires: kleopatra-data
-Requires: kleopatra-license
+Requires: kleopatra-data = %{version}-%{release}
+Requires: kleopatra-license = %{version}-%{release}
 
 %description bin
 bin components for the kleopatra package.
@@ -56,10 +56,10 @@ data components for the kleopatra package.
 %package dev
 Summary: dev components for the kleopatra package.
 Group: Development
-Requires: kleopatra-lib
-Requires: kleopatra-bin
-Requires: kleopatra-data
-Provides: kleopatra-devel
+Requires: kleopatra-lib = %{version}-%{release}
+Requires: kleopatra-bin = %{version}-%{release}
+Requires: kleopatra-data = %{version}-%{release}
+Provides: kleopatra-devel = %{version}-%{release}
 
 %description dev
 dev components for the kleopatra package.
@@ -76,8 +76,8 @@ doc components for the kleopatra package.
 %package lib
 Summary: lib components for the kleopatra package.
 Group: Libraries
-Requires: kleopatra-data
-Requires: kleopatra-license
+Requires: kleopatra-data = %{version}-%{release}
+Requires: kleopatra-license = %{version}-%{release}
 
 %description lib
 lib components for the kleopatra package.
@@ -100,26 +100,26 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-18.08.0
+%setup -q -n kleopatra-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535430564
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549904921
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535430564
+export SOURCE_DATE_EPOCH=1549904921
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kleopatra
-cp COPYING %{buildroot}/usr/share/doc/kleopatra/COPYING
-cp COPYING.DOC %{buildroot}/usr/share/doc/kleopatra/COPYING.DOC
+mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
+cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING
+cp COPYING.DOC %{buildroot}/usr/share/package-licenses/kleopatra/COPYING.DOC
 pushd clr-build
 %make_install
 popd
@@ -227,9 +227,9 @@ popd
 /usr/lib64/qt5/plugins/kcm_kleopatra.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kleopatra/COPYING
-/usr/share/doc/kleopatra/COPYING.DOC
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kleopatra/COPYING
+/usr/share/package-licenses/kleopatra/COPYING.DOC
 
 %files locales -f kleopatra.lang -f kwatchgnupg.lang
 %defattr(-,root,root,-)
