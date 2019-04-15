@@ -6,11 +6,11 @@
 #
 Name     : kleopatra
 Version  : 18.12.3
-Release  : 4
+Release  : 5
 URL      : https://download.kde.org/stable/applications/18.12.3/src/kleopatra-18.12.3.tar.xz
 Source0  : https://download.kde.org/stable/applications/18.12.3/src/kleopatra-18.12.3.tar.xz
 Source99 : https://download.kde.org/stable/applications/18.12.3/src/kleopatra-18.12.3.tar.xz.sig
-Summary  : No detailed summary available
+Summary  : Certificate Manager and Unified Crypto GUI
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
 Requires: kleopatra-bin = %{version}-%{release}
@@ -29,11 +29,9 @@ BuildRequires : libkleo-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
-These scripts are to be executed like this:
-Windows: gpg-connect-agent -v --no-ext-connect -S path\to\S.uiserver < script
-Unix:    gpg-connect-agent -v                  -S path/to/S.uiserver < script
-You need a very recent gpg-connect-agent (min. GnuPG 2.0.8-svn4603) for most
-scripts, at least for the gpgex cases.
+Kleopatra packaging notes
+=========================
+The build dependencies should be fairly straightforward (see CMakeLists.txt)
 
 %package bin
 Summary: bin components for the kleopatra package.
@@ -60,6 +58,7 @@ Requires: kleopatra-lib = %{version}-%{release}
 Requires: kleopatra-bin = %{version}-%{release}
 Requires: kleopatra-data = %{version}-%{release}
 Provides: kleopatra-devel = %{version}-%{release}
+Requires: kleopatra = %{version}-%{release}
 
 %description dev
 dev components for the kleopatra package.
@@ -107,16 +106,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552018662
+export SOURCE_DATE_EPOCH=1555336290
 mkdir -p clr-build
 pushd clr-build
-export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1552018662
+export SOURCE_DATE_EPOCH=1555336290
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING
