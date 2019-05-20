@@ -6,7 +6,7 @@
 #
 Name     : kleopatra
 Version  : 19.04.1
-Release  : 7
+Release  : 8
 URL      : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz
 Source0  : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz
 Source99 : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz.sig
@@ -25,6 +25,7 @@ BuildRequires : gpgme-dev
 BuildRequires : kmime-dev
 BuildRequires : libassuan-dev
 BuildRequires : libgpg-error-dev
+BuildRequires : libgpg-error-extras
 BuildRequires : libkleo-dev
 BuildRequires : qtbase-dev mesa-dev
 
@@ -106,7 +107,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1558372320
+export SOURCE_DATE_EPOCH=1558374999
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -116,7 +117,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1558372320
+export SOURCE_DATE_EPOCH=1558374999
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING

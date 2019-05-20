@@ -1,4 +1,6 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
 libassuan-dev
+# we want to use the libgpg-error shared library...
 libgpg-error-dev
+libgpg-error-extras
