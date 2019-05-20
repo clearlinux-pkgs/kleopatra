@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kleopatra
-Version  : 19.04.0
-Release  : 6
-URL      : https://download.kde.org/stable/applications/19.04.0/src/kleopatra-19.04.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.0/src/kleopatra-19.04.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.0/src/kleopatra-19.04.0.tar.xz.sig
-Summary  : Certificate Manager and Unified Crypto GUI
+Version  : 19.04.1
+Release  : 7
+URL      : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz
+Source99 : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
 Requires: kleopatra-bin = %{version}-%{release}
@@ -99,22 +99,24 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-19.04.0
+%setup -q -n kleopatra-19.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1555634445
+export SOURCE_DATE_EPOCH=1558372320
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1555634445
+export SOURCE_DATE_EPOCH=1558372320
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING
