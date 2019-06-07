@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kleopatra
-Version  : 19.04.1
-Release  : 8
-URL      : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.1/src/kleopatra-19.04.1.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 19.04.2
+Release  : 9
+URL      : https://download.kde.org/stable/applications/19.04.2/src/kleopatra-19.04.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.04.2/src/kleopatra-19.04.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/19.04.2/src/kleopatra-19.04.2.tar.xz.sig
+Summary  : Certificate Manager and Unified Crypto GUI
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
 Requires: kleopatra-bin = %{version}-%{release}
@@ -60,6 +60,7 @@ Requires: kleopatra-bin = %{version}-%{release}
 Requires: kleopatra-data = %{version}-%{release}
 Provides: kleopatra-devel = %{version}-%{release}
 Requires: kleopatra = %{version}-%{release}
+Requires: kleopatra = %{version}-%{release}
 
 %description dev
 dev components for the kleopatra package.
@@ -100,24 +101,26 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-19.04.1
+%setup -q -n kleopatra-19.04.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1558374999
+export SOURCE_DATE_EPOCH=1559945584
 mkdir -p clr-build
 pushd clr-build
-export GCC_IGNORE_WERROR=1
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1558374999
+export SOURCE_DATE_EPOCH=1559945584
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING
