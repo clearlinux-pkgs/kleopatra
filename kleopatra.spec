@@ -6,7 +6,7 @@
 #
 Name     : kleopatra
 Version  : 19.04.2
-Release  : 9
+Release  : 10
 URL      : https://download.kde.org/stable/applications/19.04.2/src/kleopatra-19.04.2.tar.xz
 Source0  : https://download.kde.org/stable/applications/19.04.2/src/kleopatra-19.04.2.tar.xz
 Source99 : https://download.kde.org/stable/applications/19.04.2/src/kleopatra-19.04.2.tar.xz.sig
@@ -18,9 +18,11 @@ Requires: kleopatra-data = %{version}-%{release}
 Requires: kleopatra-lib = %{version}-%{release}
 Requires: kleopatra-license = %{version}-%{release}
 Requires: kleopatra-locales = %{version}-%{release}
+Requires: gnupg
 BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : gnupg
 BuildRequires : gpgme-dev
 BuildRequires : kmime-dev
 BuildRequires : libassuan-dev
@@ -108,9 +110,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1559945584
+export SOURCE_DATE_EPOCH=1560788211
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
 export FFLAGS="$CFLAGS -fno-lto "
@@ -120,7 +123,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1559945584
+export SOURCE_DATE_EPOCH=1560788211
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING
