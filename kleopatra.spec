@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kleopatra
-Version  : 19.04.3
-Release  : 11
-URL      : https://download.kde.org/stable/applications/19.04.3/src/kleopatra-19.04.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.3/src/kleopatra-19.04.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.3/src/kleopatra-19.04.3.tar.xz.sig
+Version  : 19.08.0
+Release  : 12
+URL      : https://download.kde.org/stable/applications/19.08.0/src/kleopatra-19.08.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.0/src/kleopatra-19.08.0.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.0/src/kleopatra-19.08.0.tar.xz.sig
 Summary  : Certificate Manager and Unified Crypto GUI
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
@@ -103,16 +103,17 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-19.04.3
+%setup -q -n kleopatra-19.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562904627
+export SOURCE_DATE_EPOCH=1565925071
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -123,7 +124,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1562904627
+export SOURCE_DATE_EPOCH=1565925071
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp COPYING %{buildroot}/usr/share/package-licenses/kleopatra/COPYING
@@ -171,8 +172,8 @@ popd
 /usr/share/kwatchgnupg/pics/kwatchgnupg.png
 /usr/share/kwatchgnupg/pics/kwatchgnupg2.png
 /usr/share/metainfo/org.kde.kleopatra.appdata.xml
-/usr/share/xdg/kleopatra.categories
-/usr/share/xdg/kleopatra.renamecategories
+/usr/share/qlogging-categories5/kleopatra.categories
+/usr/share/qlogging-categories5/kleopatra.renamecategories
 
 %files dev
 %defattr(-,root,root,-)
