@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kleopatra
-Version  : 19.12.1
-Release  : 18
-URL      : https://download.kde.org/stable/release-service/19.12.1/src/kleopatra-19.12.1.tar.xz
-Source0  : https://download.kde.org/stable/release-service/19.12.1/src/kleopatra-19.12.1.tar.xz
-Source1  : https://download.kde.org/stable/release-service/19.12.1/src/kleopatra-19.12.1.tar.xz.sig
+Version  : 19.12.2
+Release  : 19
+URL      : https://download.kde.org/stable/release-service/19.12.2/src/kleopatra-19.12.2.tar.xz
+Source0  : https://download.kde.org/stable/release-service/19.12.2/src/kleopatra-19.12.2.tar.xz
+Source1  : https://download.kde.org/stable/release-service/19.12.2/src/kleopatra-19.12.2.tar.xz.sig
 Summary  : Certificate Manager and Unified Crypto GUI
 Group    : Development/Tools
 License  : GFDL-1.2 GPL-2.0
@@ -103,15 +103,15 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-19.12.1
-cd %{_builddir}/kleopatra-19.12.1
+%setup -q -n kleopatra-19.12.2
+cd %{_builddir}/kleopatra-19.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1578695882
+export SOURCE_DATE_EPOCH=1581048228
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -125,11 +125,11 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1578695882
+export SOURCE_DATE_EPOCH=1581048228
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
-cp %{_builddir}/kleopatra-19.12.1/COPYING %{buildroot}/usr/share/package-licenses/kleopatra/1495fc4592f8e9b7641127ee24cfe6b6930645c8
-cp %{_builddir}/kleopatra-19.12.1/COPYING.DOC %{buildroot}/usr/share/package-licenses/kleopatra/5897e7b5abe2c1a662e8a3bea20d40fbcdf92d09
+cp %{_builddir}/kleopatra-19.12.2/COPYING %{buildroot}/usr/share/package-licenses/kleopatra/1495fc4592f8e9b7641127ee24cfe6b6930645c8
+cp %{_builddir}/kleopatra-19.12.2/COPYING.DOC %{buildroot}/usr/share/package-licenses/kleopatra/5897e7b5abe2c1a662e8a3bea20d40fbcdf92d09
 pushd clr-build
 %make_install
 popd
