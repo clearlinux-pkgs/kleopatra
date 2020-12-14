@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kleopatra
-Version  : 20.08.3
-Release  : 27
-URL      : https://download.kde.org/stable/release-service/20.08.3/src/kleopatra-20.08.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.08.3/src/kleopatra-20.08.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.08.3/src/kleopatra-20.08.3.tar.xz.sig
+Version  : 20.12.0
+Release  : 28
+URL      : https://download.kde.org/stable/release-service/20.12.0/src/kleopatra-20.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.12.0/src/kleopatra-20.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.12.0/src/kleopatra-20.12.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GFDL-1.2 GPL-2.0
+License  : GFDL-1.2 GPL-2.0 LGPL-2.0 LGPL-2.1
 Requires: kleopatra-bin = %{version}-%{release}
 Requires: kleopatra-data = %{version}-%{release}
 Requires: kleopatra-lib = %{version}-%{release}
@@ -120,15 +120,15 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-20.08.3
-cd %{_builddir}/kleopatra-20.08.3
+%setup -q -n kleopatra-20.12.0
+cd %{_builddir}/kleopatra-20.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604616518
+export SOURCE_DATE_EPOCH=1607911889
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -141,11 +141,15 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1604616518
+export SOURCE_DATE_EPOCH=1607911889
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
-cp %{_builddir}/kleopatra-20.08.3/COPYING %{buildroot}/usr/share/package-licenses/kleopatra/1495fc4592f8e9b7641127ee24cfe6b6930645c8
-cp %{_builddir}/kleopatra-20.08.3/COPYING.DOC %{buildroot}/usr/share/package-licenses/kleopatra/5897e7b5abe2c1a662e8a3bea20d40fbcdf92d09
+cp %{_builddir}/kleopatra-20.12.0/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/7697008f58568e61e7598e796eafc2a997503fde
+cp %{_builddir}/kleopatra-20.12.0/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/kleopatra-20.12.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/kleopatra-20.12.0/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kleopatra-20.12.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kleopatra-20.12.0/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/6f1f675aa5f6a2bbaa573b8343044b166be28399
 pushd clr-build
 %make_install
 popd
@@ -254,8 +258,11 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/kleopatra/1495fc4592f8e9b7641127ee24cfe6b6930645c8
-/usr/share/package-licenses/kleopatra/5897e7b5abe2c1a662e8a3bea20d40fbcdf92d09
+/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
+/usr/share/package-licenses/kleopatra/2a638514c87c4923c0570c55822620fad56f2a33
+/usr/share/package-licenses/kleopatra/6f1f675aa5f6a2bbaa573b8343044b166be28399
+/usr/share/package-licenses/kleopatra/7697008f58568e61e7598e796eafc2a997503fde
+/usr/share/package-licenses/kleopatra/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f kleopatra.lang -f kwatchgnupg.lang
 %defattr(-,root,root,-)
