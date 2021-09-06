@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kleopatra
-Version  : 21.04.2
-Release  : 32
-URL      : https://download.kde.org/stable/release-service/21.04.2/src/kleopatra-21.04.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/21.04.2/src/kleopatra-21.04.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/21.04.2/src/kleopatra-21.04.2.tar.xz.sig
+Version  : 21.08.1
+Release  : 33
+URL      : https://download.kde.org/stable/release-service/21.08.1/src/kleopatra-21.08.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/21.08.1/src/kleopatra-21.08.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/21.08.1/src/kleopatra-21.08.1.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0 LGPL-2.1
@@ -23,10 +23,10 @@ BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules-data
+BuildRequires : git
 BuildRequires : gnupg
 BuildRequires : gpgme-dev
 BuildRequires : gpgme-dev gpgme-extras
-BuildRequires : kcmutils-dev
 BuildRequires : kcodecs-dev
 BuildRequires : kconfig-dev
 BuildRequires : kconfigwidgets-dev
@@ -120,15 +120,15 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-21.04.2
-cd %{_builddir}/kleopatra-21.04.2
+%setup -q -n kleopatra-21.08.1
+cd %{_builddir}/kleopatra-21.08.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623390262
+export SOURCE_DATE_EPOCH=1630961663
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -141,17 +141,17 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1623390262
+export SOURCE_DATE_EPOCH=1630961663
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
-cp %{_builddir}/kleopatra-21.04.2/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kleopatra/29fb05b49e12a380545499938c4879440bd8851e
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kleopatra/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/7697008f58568e61e7598e796eafc2a997503fde
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/2a638514c87c4923c0570c55822620fad56f2a33
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/kleopatra-21.04.2/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/6f1f675aa5f6a2bbaa573b8343044b166be28399
+cp %{_builddir}/kleopatra-21.08.1/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/kleopatra/29fb05b49e12a380545499938c4879440bd8851e
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/kleopatra/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/GFDL-1.2-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/7697008f58568e61e7598e796eafc2a997503fde
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kleopatra-21.08.1/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/6f1f675aa5f6a2bbaa573b8343044b166be28399
 pushd clr-build
 %make_install
 popd
@@ -183,15 +183,11 @@ popd
 /usr/share/kleopatra/pics/kleopatra_splashscreen.svgz
 /usr/share/kleopatra/pics/kleopatra_wizard.png
 /usr/share/kleopatra/pics/kleopatra_wizard.svgz
-/usr/share/kservices5/kleopatra_config_appear.desktop
-/usr/share/kservices5/kleopatra_config_cryptooperations.desktop
-/usr/share/kservices5/kleopatra_config_dirserv.desktop
+/usr/share/kservices5/ServiceMenus/kleopatra_decryptverifyfiles.desktop
+/usr/share/kservices5/ServiceMenus/kleopatra_decryptverifyfolders.desktop
+/usr/share/kservices5/ServiceMenus/kleopatra_signencryptfiles.desktop
+/usr/share/kservices5/ServiceMenus/kleopatra_signencryptfolders.desktop
 /usr/share/kservices5/kleopatra_config_gnupgsystem.desktop
-/usr/share/kservices5/kleopatra_config_smimevalidation.desktop
-/usr/share/kservices5/kleopatra_decryptverifyfiles.desktop
-/usr/share/kservices5/kleopatra_decryptverifyfolders.desktop
-/usr/share/kservices5/kleopatra_signencryptfiles.desktop
-/usr/share/kservices5/kleopatra_signencryptfolders.desktop
 /usr/share/kwatchgnupg/pics/kwatchgnupg.png
 /usr/share/kwatchgnupg/pics/kwatchgnupg2.png
 /usr/share/metainfo/org.kde.kleopatra.appdata.xml
@@ -256,7 +252,7 @@ popd
 /usr/lib64/libkleopatraclientcore.so.1.3.0
 /usr/lib64/libkleopatraclientgui.so.1
 /usr/lib64/libkleopatraclientgui.so.1.3.0
-/usr/lib64/qt5/plugins/kcm_kleopatra.so
+/usr/lib64/qt5/plugins/pim/kcms/kleopatra/kleopatra_config_gnupgsystem.so
 
 %files license
 %defattr(0644,root,root,0755)
