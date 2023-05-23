@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kleopatra
-Version  : 23.04.0
-Release  : 57
-URL      : https://download.kde.org/stable/release-service/23.04.0/src/kleopatra-23.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.04.0/src/kleopatra-23.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.04.0/src/kleopatra-23.04.0.tar.xz.sig
+Version  : 23.04.1
+Release  : 58
+URL      : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0 LGPL-2.1 LGPL-3.0
@@ -20,8 +20,7 @@ Requires: kleopatra-lib = %{version}-%{release}
 Requires: kleopatra-license = %{version}-%{release}
 Requires: kleopatra-locales = %{version}-%{release}
 Requires: gnupg
-BuildRequires : akonadi-dev
-BuildRequires : akonadi-mime-dev
+BuildRequires :  kmailtransport-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules shared-mime-info
@@ -114,28 +113,42 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-23.04.0
-cd %{_builddir}/kleopatra-23.04.0
+%setup -q -n kleopatra-23.04.1
+cd %{_builddir}/kleopatra-23.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682109324
+export SOURCE_DATE_EPOCH=1684860611
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake ..
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1682109324
+export SOURCE_DATE_EPOCH=1684860611
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp %{_builddir}/kleopatra-%{version}/.krazy.license %{buildroot}/usr/share/package-licenses/kleopatra/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4 || :
@@ -150,17 +163,23 @@ cp %{_builddir}/kleopatra-%{version}/LICENSES/LGPL-2.0-or-later.txt %{buildroot}
 cp %{_builddir}/kleopatra-%{version}/LICENSES/LGPL-2.1-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/3c3d7573e137d48253731c975ecf90d74cfa9efe || :
 cp %{_builddir}/kleopatra-%{version}/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/kleopatra/6f1f675aa5f6a2bbaa573b8343044b166be28399 || :
 cp %{_builddir}/kleopatra-%{version}/LICENSES/LGPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/kleopatra/757b86330df80f81143d5916b3e92b4bcb1b1890 || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang kleopatra
 %find_lang kwatchgnupg
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/kleopatra
+/V3/usr/bin/kwatchgnupg
 /usr/bin/kleopatra
 /usr/bin/kwatchgnupg
 
@@ -194,6 +213,8 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libkleopatraclientcore.so
+/V3/usr/lib64/libkleopatraclientgui.so
 /usr/lib64/libkleopatraclientcore.so
 /usr/lib64/libkleopatraclientgui.so
 
@@ -250,6 +271,11 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libkleopatraclientcore.so.1
+/V3/usr/lib64/libkleopatraclientcore.so.1.3.0
+/V3/usr/lib64/libkleopatraclientgui.so.1
+/V3/usr/lib64/libkleopatraclientgui.so.1.3.0
+/V3/usr/lib64/qt5/plugins/pim5/kcms/kleopatra/kleopatra_config_gnupgsystem.so
 /usr/lib64/libkleopatraclientcore.so.1
 /usr/lib64/libkleopatraclientcore.so.1.3.0
 /usr/lib64/libkleopatraclientgui.so.1
