@@ -7,7 +7,7 @@
 #
 Name     : kleopatra
 Version  : 23.04.1
-Release  : 58
+Release  : 59
 URL      : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz
 Source0  : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz
 Source1  : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz.sig
@@ -20,7 +20,8 @@ Requires: kleopatra-lib = %{version}-%{release}
 Requires: kleopatra-license = %{version}-%{release}
 Requires: kleopatra-locales = %{version}-%{release}
 Requires: gnupg
-BuildRequires :  kmailtransport-dev
+BuildRequires : akonadi-dev
+BuildRequires : akonadi-mime-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules shared-mime-info
@@ -121,7 +122,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684860611
+export SOURCE_DATE_EPOCH=1685585683
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -148,7 +149,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1684860611
+export SOURCE_DATE_EPOCH=1685585683
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp %{_builddir}/kleopatra-%{version}/.krazy.license %{buildroot}/usr/share/package-licenses/kleopatra/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4 || :
@@ -213,8 +214,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libkleopatraclientcore.so
-/V3/usr/lib64/libkleopatraclientgui.so
 /usr/lib64/libkleopatraclientcore.so
 /usr/lib64/libkleopatraclientgui.so
 
@@ -271,9 +270,7 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libkleopatraclientcore.so.1
 /V3/usr/lib64/libkleopatraclientcore.so.1.3.0
-/V3/usr/lib64/libkleopatraclientgui.so.1
 /V3/usr/lib64/libkleopatraclientgui.so.1.3.0
 /V3/usr/lib64/qt5/plugins/pim5/kcms/kleopatra/kleopatra_config_gnupgsystem.so
 /usr/lib64/libkleopatraclientcore.so.1
