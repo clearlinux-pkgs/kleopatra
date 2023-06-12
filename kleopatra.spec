@@ -6,11 +6,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kleopatra
-Version  : 23.04.1
-Release  : 59
-URL      : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.04.1/src/kleopatra-23.04.1.tar.xz.sig
+Version  : 23.04.2
+Release  : 60
+URL      : https://download.kde.org/stable/release-service/23.04.2/src/kleopatra-23.04.2.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.04.2/src/kleopatra-23.04.2.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.04.2/src/kleopatra-23.04.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0 LGPL-2.1 LGPL-3.0
@@ -20,6 +20,7 @@ Requires: kleopatra-lib = %{version}-%{release}
 Requires: kleopatra-license = %{version}-%{release}
 Requires: kleopatra-locales = %{version}-%{release}
 Requires: gnupg
+BuildRequires :  kmailtransport-dev
 BuildRequires : akonadi-dev
 BuildRequires : akonadi-mime-dev
 BuildRequires : buildreq-cmake
@@ -114,15 +115,15 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-23.04.1
-cd %{_builddir}/kleopatra-23.04.1
+%setup -q -n kleopatra-23.04.2
+cd %{_builddir}/kleopatra-23.04.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685585683
+export SOURCE_DATE_EPOCH=1686537796
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -149,7 +150,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1685585683
+export SOURCE_DATE_EPOCH=1686537796
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp %{_builddir}/kleopatra-%{version}/.krazy.license %{buildroot}/usr/share/package-licenses/kleopatra/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4 || :
