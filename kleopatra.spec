@@ -8,11 +8,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : kleopatra
-Version  : 23.08.3
-Release  : 66
-URL      : https://download.kde.org/stable/release-service/23.08.3/src/kleopatra-23.08.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/23.08.3/src/kleopatra-23.08.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/23.08.3/src/kleopatra-23.08.3.tar.xz.sig
+Version  : 23.08.4
+Release  : 67
+URL      : https://download.kde.org/stable/release-service/23.08.4/src/kleopatra-23.08.4.tar.xz
+Source0  : https://download.kde.org/stable/release-service/23.08.4/src/kleopatra-23.08.4.tar.xz
+Source1  : https://download.kde.org/stable/release-service/23.08.4/src/kleopatra-23.08.4.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GFDL-1.2 GPL-2.0 LGPL-2.0 LGPL-2.1 LGPL-3.0
@@ -116,15 +116,15 @@ locales components for the kleopatra package.
 
 
 %prep
-%setup -q -n kleopatra-23.08.3
-cd %{_builddir}/kleopatra-23.08.3
+%setup -q -n kleopatra-23.08.4
+cd %{_builddir}/kleopatra-23.08.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701995663
+export SOURCE_DATE_EPOCH=1702986367
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -174,7 +174,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701995663
+export SOURCE_DATE_EPOCH=1702986367
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kleopatra
 cp %{_builddir}/kleopatra-%{version}/.krazy.license %{buildroot}/usr/share/package-licenses/kleopatra/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4 || :
