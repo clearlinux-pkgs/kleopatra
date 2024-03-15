@@ -1,5 +1,5 @@
 PKG_NAME := kleopatra
-URL = https://download.kde.org/stable/release-service/23.08.5/src/kleopatra-23.08.5.tar.xz
+URL = https://download.kde.org/stable/release-service/24.02.0/src/kleopatra-24.02.0.tar.xz
 ARCHIVES = 
 
 include ../common/Makefile.common

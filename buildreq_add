@@ -4,3 +4,8 @@ libassuan-dev
 # we want to use the libgpg-error shared library...
 libgpg-error-dev
 libgpg-error-extras
+kmime-dev
+akonadi-mime-dev
+kidentitymanagement-dev
+mimetreeparser-dev
+kmbox-dev
