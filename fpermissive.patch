@@ -1,0 +1,11 @@
+--- kleopatra-24.08.2/CMakeLists.txt~	2024-10-07 03:05:15.000000000 +0000
++++ kleopatra-24.08.2/CMakeLists.txt	2025-01-08 15:19:47.646513715 +0000
+@@ -192,7 +192,7 @@
+ ecm_set_disabled_deprecation_versions(QT 6.7.2 KF 6.4.0)
+ 
+ if(CMAKE_COMPILER_IS_GNUCXX)
+-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-braces -Wno-parentheses -Wno-ignored-qualifiers")
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-braces -Wno-parentheses -Wno-ignored-qualifiers -fpermissive")
+ endif()
+ if(MINGW)
+     # we do not care about different signedness of passed pointer arguments
